@@ -7,7 +7,7 @@ export async function register(
   next: express.NextFunction
 ) {
   try {
-    const response = await create(req.body);
+    await create(req.body);
     return res.status(201).json("Successfully registered");
   } catch (error: any) {
     next(error);

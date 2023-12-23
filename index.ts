@@ -16,7 +16,6 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    console.log("== in handler");
     if (err instanceof HttpException) {
       return res.status(err.code).json(err.message);
     } else {
@@ -24,6 +23,7 @@ app.use(
     }
   }
 );
+
 http
   .createServer(app)
   .listen(PORT, () => console.log(`Server listening on ${PORT}`));

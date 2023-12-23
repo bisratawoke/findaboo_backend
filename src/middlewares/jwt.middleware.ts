@@ -27,9 +27,17 @@ export async function verifyUser(
   try {
     const token = getAuthToken(req.headers);
     const userInfo = jwt.verify(token, SECRET);
-    return userInfo;
+    return res.json(userInfo);
   } catch (error) {
-    next(error);
+    if (error instanceof jwt.JsonWebTokenError) {
+      let httpError = new HttpException(
+        "unauthenticated",
+        HttpErrorCode.UNAUTHENTICATED
+      );
+      next(httpError);
+    } else {
+      next(error);
+    }
   }
 }
 

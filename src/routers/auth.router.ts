@@ -6,6 +6,7 @@ import {
   createJwtTokenAndSendToUser,
   verifyUser,
 } from "../middlewares/jwt.middleware";
+
 const authRouter = express.Router();
 
 authRouter.post("/register", authRegisterDto(), validate, register);
